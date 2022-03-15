@@ -1,0 +1,3 @@
+ArgumentError: Package NLPModels not found in current path:
+- Run `import Pkg; Pkg.add("NLPModels")` to install the NLPModels package.
+
