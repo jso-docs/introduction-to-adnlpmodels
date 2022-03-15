@@ -1,3 +1,0 @@
-ArgumentError: Package ADNLPModels not found in current path:
-- Run `import Pkg; Pkg.add("ADNLPModels")` to install the ADNLPModels package.
-

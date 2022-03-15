@@ -1,3 +1,2 @@
-ArgumentError: Package NLPModels not found in current path:
-- Run `import Pkg; Pkg.add("NLPModels")` to install the NLPModels package.
-
+cx = [-2.2, 2.44]
+Jx = [1.0 1.0; -2.4 2.0]
