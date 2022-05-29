@@ -2,7 +2,7 @@
  "tutorial.md"</code></pre> <h2 id=adnlpmodel_tutorial ><a href="#adnlpmodel_tutorial" class=header-anchor >ADNLPModel Tutorial</a></h2> <p>ADNLPModel is simple to use and is useful for classrooms. It only needs the objective function <code>f</code> and a starting point <code>x^0</code> to be well-defined. For constrained problems, you&#39;ll also need the constraints function <code>c</code>, and the constraints vectors <code>c_L</code> and <code>c_U</code>, such that <code>c_L \leq c&#40;x&#41; \leq c_U</code>. Equality constraints will be automatically identified as those indices <code>i</code> for which <code>c_&#123;L_i&#125; &#61; c_&#123;U_i&#125;</code>.</p> <p>Let&#39;s define the famous Rosenbrock function</p> <pre><code class=language-julia >f&#40;x&#41; &#61; &#40;x_1 - 1&#41;^2 &#43; 100&#40;x_2 - x_1^2&#41;^2,</code></pre><pre><code class="plaintext code-output">syntax: incomplete: premature end of input
 </code></pre> <p>with starting point <code>x^0 &#61; &#40;-1.2,1.0&#41;</code>.</p> <pre><code class=language-julia >using ADNLPModels
 
-nlp &#61; ADNLPModel&#40;x-&gt;&#40;x&#91;1&#93; - 1.0&#41;^2 &#43; 100*&#40;x&#91;2&#93; - x&#91;1&#93;^2&#41;^2 , &#91;-1.2; 1.0&#93;&#41;</code></pre><pre><code class="plaintext code-output">ADNLPModel - Model with automatic differentiation backend ADNLPModels.ForwardDiffAD{ForwardDiff.GradientConfig{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2, Vector{ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}}}}(3, 0, ForwardDiff.GradientConfig{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2, Vector{ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}}}((Partials(1.0, 0.0), Partials(0.0, 1.0)), ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}[Dual{ForwardDiff.Tag{var"#1#2", Float64}}(6.91828137818613e-310,6.91828133573443e-310,6.91831680065423e-310), Dual{ForwardDiff.Tag{var"#1#2", Float64}}(6.9183185417803e-310,6.9183185418396e-310,6.91831964002855e-310)]))
+nlp &#61; ADNLPModel&#40;x-&gt;&#40;x&#91;1&#93; - 1.0&#41;^2 &#43; 100*&#40;x&#91;2&#93; - x&#91;1&#93;^2&#41;^2 , &#91;-1.2; 1.0&#93;&#41;</code></pre><pre><code class="plaintext code-output">ADNLPModel - Model with automatic differentiation backend ADNLPModels.ForwardDiffAD{ForwardDiff.GradientConfig{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2, Vector{ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}}}}(3, 0, ForwardDiff.GradientConfig{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2, Vector{ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}}}((Partials(1.0, 0.0), Partials(0.0, 1.0)), ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}[Dual{ForwardDiff.Tag{var"#1#2", Float64}}(1.6e-322,2.0e-323,5.0e-324), Dual{ForwardDiff.Tag{var"#1#2", Float64}}(6.9246549159485e-310,6.924612977749e-310,1.5495e-319)]))
   Problem name: Generic
    All variables: ████████████████████ 2      All constraints: ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ 0     
             free: ████████████████████ 2                 free: ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ 0     
@@ -190,7 +190,7 @@ jac_residual&#40;nls, x0&#41;
     <footer class=footer >
       <div class="content has-text-centered is-small">
         &copy; Abel Soares Siqueira. <br>
-        Last modified: May 22, 2022.<br>
+        Last modified: May 29, 2022.<br>
         <a ckass=link  href="https://github.com/jso-docs/">jso-docs at GitHub</a>
       </div>
     </footer>
