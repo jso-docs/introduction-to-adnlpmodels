@@ -2,7 +2,7 @@
  "tutorial.md"</code></pre> <h2 id=adnlpmodel_tutorial ><a href="#adnlpmodel_tutorial" class=header-anchor >ADNLPModel Tutorial</a></h2> <p>ADNLPModel is simple to use and is useful for classrooms. It only needs the objective function <code>f</code> and a starting point <code>x^0</code> to be well-defined. For constrained problems, you&#39;ll also need the constraints function <code>c</code>, and the constraints vectors <code>c_L</code> and <code>c_U</code>, such that <code>c_L \leq c&#40;x&#41; \leq c_U</code>. Equality constraints will be automatically identified as those indices <code>i</code> for which <code>c_&#123;L_i&#125; &#61; c_&#123;U_i&#125;</code>.</p> <p>Let&#39;s define the famous Rosenbrock function</p> <pre><code class=language-julia >f&#40;x&#41; &#61; &#40;x_1 - 1&#41;^2 &#43; 100&#40;x_2 - x_1^2&#41;^2,</code></pre><pre><code class="plaintext code-output">syntax: incomplete: premature end of input
 </code></pre> <p>with starting point <code>x^0 &#61; &#40;-1.2,1.0&#41;</code>.</p> <pre><code class=language-julia >using ADNLPModels
 
-nlp &#61; ADNLPModel&#40;x-&gt;&#40;x&#91;1&#93; - 1.0&#41;^2 &#43; 100*&#40;x&#91;2&#93; - x&#91;1&#93;^2&#41;^2 , &#91;-1.2; 1.0&#93;&#41;</code></pre><pre><code class="plaintext code-output">ADNLPModel - Model with automatic differentiation backend ADNLPModels.ForwardDiffAD{ForwardDiff.GradientConfig{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2, Vector{ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}}}}(3, 0, ForwardDiff.GradientConfig{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2, Vector{ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}}}((Partials(1.0, 0.0), Partials(0.0, 1.0)), ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}[Dual{ForwardDiff.Tag{var"#1#2", Float64}}(0.0,6.9136254866468e-310,6.91362547799944e-310), Dual{ForwardDiff.Tag{var"#1#2", Float64}}(0.0,6.9136254866468e-310,6.9136254866468e-310)]))
+nlp &#61; ADNLPModel&#40;x-&gt;&#40;x&#91;1&#93; - 1.0&#41;^2 &#43; 100*&#40;x&#91;2&#93; - x&#91;1&#93;^2&#41;^2 , &#91;-1.2; 1.0&#93;&#41;</code></pre><pre><code class="plaintext code-output">ADNLPModel - Model with automatic differentiation backend ADNLPModels.ForwardDiffAD{ForwardDiff.GradientConfig{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2, Vector{ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}}}}(3, 0, ForwardDiff.GradientConfig{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2, Vector{ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}}}((Partials(1.0, 0.0), Partials(0.0, 1.0)), ForwardDiff.Dual{ForwardDiff.Tag{var"#1#2", Float64}, Float64, 2}[Dual{ForwardDiff.Tag{var"#1#2", Float64}}(6.9205189781478e-310,6.9205189667811e-310,6.9205191176261e-310), Dual{ForwardDiff.Tag{var"#1#2", Float64}}(6.9205191179178e-310,6.92051937792437e-310,6.92051896581433e-310)]))
   Problem name: Generic
    All variables: ████████████████████ 2      All constraints: ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ 0     
             free: ████████████████████ 2                 free: ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ 0     
@@ -75,16 +75,16 @@ iter = 17962
 H&#40;x&#41; &#61; hess&#40;nlp, x&#41;
 x &#61; nlp.meta.x0
 d &#61; -H&#40;x&#41;\g&#40;x&#41;</code></pre><pre><code class="plaintext code-output">2-element Vector{Float64}:
- 0.02471910112359557
- 0.3806741573033705</code></pre> <p>or a few</p> <pre><code class=language-julia >for i &#61; 1:5
+ 0.0247191011235955
+ 0.38067415730337073</code></pre> <p>or a few</p> <pre><code class=language-julia >for i &#61; 1:5
   global x
   x &#61; x - H&#40;x&#41;\g&#40;x&#41;
   println&#40;&quot;x &#61; &#36;x&quot;&#41;
-end</code></pre><pre><code class="plaintext code-output">x = [-1.1752808988764043, 1.3806741573033705]
-x = [0.7631148711767448, -3.1750338547488415]
-x = [0.7634296788843487, 0.5828247754975671]
-x = [0.9999953110849988, 0.9440273238534903]
-x = [0.999995695653676, 0.9999913913257314]
+end</code></pre><pre><code class="plaintext code-output">x = [-1.1752808988764045, 1.3806741573033707]
+x = [0.763114871176314, -3.1750338547478294]
+x = [0.7634296788839187, 0.5828247754969103]
+x = [0.9999953110849887, 0.9440273238532714]
+x = [0.9999956956536669, 0.9999913913257132]
 </code></pre> <p>Also, notice how we can reuse the method.</p> <pre><code class=language-julia >f&#40;x&#41; &#61; &#40;x&#91;1&#93;^2 &#43; x&#91;2&#93;^2 - 5&#41;^2 &#43; &#40;x&#91;1&#93;*x&#91;2&#93; - 2&#41;^2
 x0 &#61; &#91;3.0; 2.0&#93;
 nlp &#61; ADNLPModel&#40;f, x0&#41;
@@ -190,7 +190,7 @@ jac_residual&#40;nls, x0&#41;
     <footer class=footer >
       <div class="content has-text-centered is-small">
         &copy; Abel Soares Siqueira. <br>
-        Last modified: June 05, 2022.<br>
+        Last modified: June 12, 2022.<br>
         <a ckass=link  href="https://github.com/jso-docs/">jso-docs at GitHub</a>
       </div>
     </footer>
